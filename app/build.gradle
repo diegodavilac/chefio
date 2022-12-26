@@ -1,0 +1,91 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    namespace 'dev.diegodc.chefio'
+    compileSdk ConfigData.compileSdkVersion
+
+    defaultConfig {
+        applicationId "dev.diegodc.chefio"
+        minSdk ConfigData.minSdkVersion
+        targetSdk ConfigData.targetSdkVersion
+        versionCode ConfigData.versionCode
+        versionName ConfigData.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.3.2'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+
+    def composeBom = platform(Dependencies.composeBom)
+    implementation composeBom
+    androidTestImplementation composeBom
+
+    // Material
+    implementation(Dependencies.material)
+
+    //Compose
+    implementation(Dependencies.composeActivity)
+    implementation(Dependencies.composeViewModel)
+    implementation(Dependencies.composeViewModelKtx)
+    implementation(Dependencies.navigation)
+    implementation(Dependencies.accompanistTheme)
+    implementation(Dependencies.accompanistSwipeRefresh)
+    implementation(Dependencies.composeRuntime)
+    implementation(Dependencies.androidLifecycleKtx)
+    implementation(Dependencies.composeSavedState)
+    kapt (Dependencies.androidLifecycleCompiler)
+
+    //Hilt
+    implementation (Dependencies.hilt)
+    implementation (Dependencies.hiltNavigation)
+    kapt (Dependencies.hiltCompiler)
+
+    //Libraries
+    implementation(Dependencies.coil)
+    implementation(Dependencies.coilCompose)
+
+    // Android Studio Preview support
+    implementation(Dependencies.composePreview)
+    debugImplementation(Dependencies.debugComposePreview)
+
+    // UI Test
+    androidTestImplementation(Dependencies.composeTest)
+    debugImplementation(Dependencies.composeManifestTest)
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+}

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ChefIO</string>
+    <string name="home">Home</string>
+    <string name="map">Map</string>
+    <string name="add_receipt">Add Receipt</string>
+    <string name="upload_cover_photo">Add Cover Photo</string>
+    <string name="food_name">Food Name</string>
+    <string name="food_description">Description</string>
+    <string name="food_cooking_duration">Cooking Duration</string>
+</resources>
