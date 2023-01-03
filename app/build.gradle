@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     namespace 'dev.diegodc.chefio'
@@ -57,6 +58,11 @@ dependencies {
     // Material
     implementation(Dependencies.material)
 
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
     //Compose
     implementation(Dependencies.composeActivity)
     implementation(Dependencies.composeViewModel)
@@ -64,6 +70,7 @@ dependencies {
     implementation(Dependencies.navigation)
     implementation(Dependencies.accompanistTheme)
     implementation(Dependencies.accompanistSwipeRefresh)
+    implementation(Dependencies.accompanistViewPager)
     implementation(Dependencies.composeRuntime)
     implementation(Dependencies.androidLifecycleKtx)
     implementation(Dependencies.composeSavedState)

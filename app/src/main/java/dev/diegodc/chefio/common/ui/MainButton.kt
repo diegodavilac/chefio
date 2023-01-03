@@ -51,11 +51,16 @@ fun MainButton(
 }
 
 @Composable
-fun OutlineMainButton(modifier: Modifier, label: String = "", onClick: () -> Unit = {}) {
+fun OutlineMainButton(
+    modifier: Modifier,
+    label: String = "",
+    color: Color = PRIMARY_COLOR,
+    onClick: () -> Unit = {}
+) {
     OutlinedButton(
         modifier = modifier,
         shape = RoundedCornerShape(32.dp),
-        border = BorderStroke(2.dp, PRIMARY_COLOR),
+        border = BorderStroke(2.dp, color = color),
         contentPadding = PaddingValues(
             horizontal = 16.dp,
             vertical = 12.dp
@@ -69,7 +74,7 @@ fun OutlineMainButton(modifier: Modifier, label: String = "", onClick: () -> Uni
                     lineHeight = 18.sp,
                     fontFamily = fonts,
                     fontWeight = FontWeight.Bold,
-                    color = PRIMARY_COLOR
+                    color = color
                 )
             )
         },

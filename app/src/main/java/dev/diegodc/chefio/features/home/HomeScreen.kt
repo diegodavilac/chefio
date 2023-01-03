@@ -18,53 +18,53 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
+import com.google.accompanist.pager.ExperimentalPagerApi
 import dev.diegodc.chefio.R
 import dev.diegodc.chefio.common.theme.*
 import dev.diegodc.chefio.common.ui.LoadingContent
 import dev.diegodc.chefio.models.Receipt
 import dev.diegodc.chefio.models.UserProfile
+import java.util.*
 
+@OptIn(ExperimentalLifecycleComposeApi::class, ExperimentalPagerApi::class)
 @Composable
 fun HomeScreen(
     onReceiptClick: (Receipt) -> Unit,
     @StringRes userMessage: Int,
     onUserMessageDisplayed: () -> Unit,
     modifier: Modifier = Modifier,
-//    viewModel: TasksViewModel = hiltViewModel(),
+    viewModel: HomeViewModel = hiltViewModel(),
 ) {
-    HomeContent(
-        isLoading = false,
-        receipts = listOf(),
-        onRefresh = {},
-        onReceiptClick = onReceiptClick,
-        modifier = modifier.padding(8.dp)
-    )
-}
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
-@Composable
-private fun HomeContent(
-    receipts: List<Receipt>,
-    isLoading: Boolean,
-    onRefresh: () -> Unit,
-    onReceiptClick: (Receipt) -> Unit,
-    modifier: Modifier,
-) {
     LoadingContent(
-        isLoading = isLoading,
-        isEmpty = receipts.isEmpty() && !isLoading,
+        isLoading = uiState.value.isLoading,
+        isEmpty = uiState.value.receipts.isEmpty() && !uiState.value.isLoading,
         emptyContent = { ReceiptEmptyContent(modifier) },
-        onRefresh = onRefresh
+        onRefresh = {
+            viewModel.loadData()
+        }
     ) {
         Column(
             modifier = modifier
+                .background(
+                    color = FORM
+                )
                 .fillMaxSize()
-                .padding(horizontal = dimensionResource(id = R.dimen.horizontal_margin))
+                .padding(
+                    horizontal = dimensionResource(id = R.dimen.horizontal_margin),
+                )
         ) {
             LazyVerticalGrid(
-                columns = GridCells.Adaptive(minSize = 128.dp)
+                columns = GridCells.Adaptive(minSize = 128.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                items(receipts) { receipt ->
+                items(uiState.value.receipts) { receipt ->
                     ReceiptCardItem(
                         receipt = receipt,
                         onReceiptClick = onReceiptClick,
@@ -75,6 +75,7 @@ private fun HomeContent(
         }
     }
 }
+
 @Composable
 fun ReceiptEmptyContent(modifier: Modifier) {
     Column(
@@ -197,7 +198,8 @@ private fun previewReceiptCard() {
                         lastName = "Ipsum",
                         username = "lorem_ipsum",
                         photo = ""
-                    )
+                    ),
+                    createdAt = Date()
                 ),
                 modifier = Modifier.padding(8.dp),
                 onReceiptClick = { },

@@ -39,6 +39,7 @@ object Versions {
     const val truthVersion = "1.1.2"
 
     const val coil = "2.2.2"
+    const val googleServices = "4.3.13"
 }
 
 object Dependencies {
@@ -64,6 +65,7 @@ object Dependencies {
 
     const val accompanistTheme = "com.google.accompanist:accompanist-appcompat-theme:${Versions.accompanistVersion}"
     const val accompanistSwipeRefresh = "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanistVersion}"
+    const val accompanistViewPager = "com.google.accompanist:accompanist-pager:${Versions.accompanistVersion}"
 
     const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
     const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
@@ -82,6 +84,7 @@ object Plugins {
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val navigation = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationVersion}"
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
+    const val googleServices = "com.google.gms:google-services:${Versions.googleServices}"
 }
 
 object ConfigData {

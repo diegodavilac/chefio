@@ -7,4 +7,6 @@
     <string name="food_name">Food Name</string>
     <string name="food_description">Description</string>
     <string name="food_cooking_duration">Cooking Duration</string>
+    <string name="receipt_ingredients">Ingredients</string>
+    <string name="receipt_steps">Steps</string>
 </resources>
