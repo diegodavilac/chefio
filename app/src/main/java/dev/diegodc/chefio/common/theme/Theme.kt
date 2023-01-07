@@ -5,6 +5,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 
 private val DarkColorPalette = darkColors(
@@ -25,6 +26,13 @@ fun ChefIOTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable
     } else {
         LightColorPalette
     }
+
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setSystemBarsColor(
+        color = PRIMARY_VARIANT_COLOR,
+        darkIcons = false
+    )
+
     MaterialTheme(
         colors = colors,
         typography = Typography,

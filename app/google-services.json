@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1097293668646-6i52q21fjlfp4f40ruh5sqv2783d7omq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.diegodc.chefio",
+            "certificate_hash": "073e6815a5daf478f3e8564c96ed762ecb708b44"
+          }
+        },
+        {
           "client_id": "1097293668646-9g544pbed8ect8tmjkctlo7se49smis0.apps.googleusercontent.com",
           "client_type": 3
         }

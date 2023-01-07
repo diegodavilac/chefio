@@ -24,7 +24,9 @@ fun MainButton(
     modifier: Modifier,
     label: String = "",
     onClick: () -> Unit = {},
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    color: Color = PRIMARY_COLOR,
+    icon: @Composable () -> Unit = {}
 ) {
     Button(
         enabled = enabled,
@@ -35,6 +37,8 @@ fun MainButton(
             vertical = 12.dp
         ),
         content = {
+            icon()
+
             Text(
                 text = label,
                 textAlign = TextAlign.Center,
@@ -43,10 +47,17 @@ fun MainButton(
                     lineHeight = 18.sp,
                     fontFamily = fonts,
                     fontWeight = FontWeight.Bold
+                ),
+                color = Color.White,
+                modifier = Modifier.padding(
+                    horizontal = 8.dp
                 )
             )
         },
-        onClick = onClick
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = color
+        )
     )
 }
 
