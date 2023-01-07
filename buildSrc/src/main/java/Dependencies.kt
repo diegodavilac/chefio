@@ -38,7 +38,14 @@ object Versions {
     const val timberVersion = "5.0.1"
     const val truthVersion = "1.1.2"
 
+    const val paging = "3.1.1"
+    const val pagingCompose = "1.0.0-alpha17"
     const val coil = "2.2.2"
+    const val googleServices = "4.3.13"
+    const val googleAuth = "20.4.0"
+    const val cloudinary = "2.2.0"
+    const val mapsCompose = "2.8.0"
+    const val gmsMaps = "18.1.0"
 }
 
 object Dependencies {
@@ -50,6 +57,7 @@ object Dependencies {
     const val composeTest = "androidx.compose.ui:ui-test-junit4"
     const val composeManifestTest = "androidx.compose.ui:ui-test-manifest"
 
+    const val activity = "androidx.activity:activity:${Versions.activityComposeVersion}"
     const val composeActivity = "androidx.activity:activity-compose:${Versions.activityComposeVersion}"
     const val composeViewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.archLifecycleVersion}"
     const val composeViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.archLifecycleVersion}"
@@ -64,17 +72,24 @@ object Dependencies {
 
     const val accompanistTheme = "com.google.accompanist:accompanist-appcompat-theme:${Versions.accompanistVersion}"
     const val accompanistSwipeRefresh = "com.google.accompanist:accompanist-swiperefresh:${Versions.accompanistVersion}"
+    const val accompanistViewPager = "com.google.accompanist:accompanist-pager:${Versions.accompanistVersion}"
+    const val accompanistSystemUi = "com.google.accompanist:accompanist-systemuicontroller:${Versions.accompanistVersion}"
+    const val accompanistPermissions = "com.google.accompanist:accompanist-permissions:${Versions.accompanistVersion}"
 
     const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
     const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
     const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:${Versions.hiltAndroidXVersion}"
 
+    const val paging = "androidx.paging:paging-runtime:${Versions.paging}"
+    const val pagingCompose = "androidx.paging:paging-compose:${Versions.pagingCompose}"
 
+    const val googleAuth = "com.google.android.gms:play-services-auth:${Versions.googleAuth}"
 
-    //    // Architecture Components
-//    implementation "androidx.room:room-runtime:${Versions.roomVersion}"
-//    kapt "androidx.room:room-compiler:${Versions.roomVersion}"
-//    implementation "androidx.room:room-ktx:${Versions.roomVersion}"
+    const val cloudinary = "com.cloudinary:cloudinary-android:${Versions.cloudinary}"
+
+    const val maps = "com.google.maps.android:maps-compose:${Versions.mapsCompose}"
+    const val gmsMaps = "com.google.android.gms:play-services-maps:${Versions.gmsMaps}"
+
 }
 
 object Plugins {
@@ -82,6 +97,7 @@ object Plugins {
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val navigation = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationVersion}"
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
+    const val googleServices = "com.google.gms:google-services:${Versions.googleServices}"
 }
 
 object ConfigData {

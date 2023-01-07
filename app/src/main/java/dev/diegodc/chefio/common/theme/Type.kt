@@ -38,13 +38,13 @@ val Typography = Typography(
     ),
     body1 = TextStyle(
         fontWeight = FontWeight.Medium,
-        fontSize = 17.sp,
-        lineHeight = 27.sp
+        fontSize = 15.sp,
+        lineHeight = 25.sp
     ),
     body2 = TextStyle(
         fontWeight = FontWeight.Medium,
-        fontSize = 15.sp,
-        lineHeight = 25.sp
+        fontSize = 13.sp,
+        lineHeight = 23.sp
     ),
     subtitle1 = TextStyle(
         fontWeight = FontWeight.Medium,

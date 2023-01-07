@@ -1,17 +1,28 @@
 package dev.diegodc.chefio
 
+import android.util.Log
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import dev.diegodc.chefio.Destinations.HOME_ROUTE
-import dev.diegodc.chefio.Destinations.RECEIPT_DETAIL_ROUTE
-import dev.diegodc.chefio.DestinationsArgs.RECEIPT_ID_ARG
+import com.google.android.gms.maps.model.LatLng
+import dev.diegodc.chefio.Destinations.MAP_ROUTE
+import dev.diegodc.chefio.Destinations.RECIPE_DETAIL_ROUTE
+import dev.diegodc.chefio.Destinations.SIGN_IN_ROUTE
+import dev.diegodc.chefio.Destinations.SIGN_UP_ROUTE
+import dev.diegodc.chefio.Destinations.SPLASH_ROUTE
+import dev.diegodc.chefio.DestinationsArgs.MAP_LAT_ARG
+import dev.diegodc.chefio.DestinationsArgs.MAP_LNG_ARG
+import dev.diegodc.chefio.DestinationsArgs.RECIPE_ID_ARG
 import dev.diegodc.chefio.DestinationsArgs.TITLE_ARG
 import dev.diegodc.chefio.DestinationsArgs.USER_MESSAGE_ARG
-import dev.diegodc.chefio.Screens.ADD_EDIT_RECEIPT_SCREEN
+import dev.diegodc.chefio.Screens.ADD_EDIT_RECIPE_SCREEN
 import dev.diegodc.chefio.Screens.DASHBOARD_SCREEN
 import dev.diegodc.chefio.Screens.HOME_SCREEN
 import dev.diegodc.chefio.Screens.MAP_SCREEN
-import dev.diegodc.chefio.Screens.RECEIPT_DETAIL_SCREEN
+import dev.diegodc.chefio.Screens.PROFILE_SCREEN
+import dev.diegodc.chefio.Screens.RECIPE_DETAIL_SCREEN
+import dev.diegodc.chefio.Screens.SIGN_IN_SCREEN
+import dev.diegodc.chefio.Screens.SIGN_UP_SCREEN
+import dev.diegodc.chefio.Screens.SPLASH_SCREEN
 
 /**
  * Screens used in [Destinations]
@@ -20,8 +31,12 @@ private object Screens {
     const val DASHBOARD_SCREEN = "dashboard"
     const val HOME_SCREEN = "home"
     const val MAP_SCREEN = "map"
-    const val RECEIPT_DETAIL_SCREEN = "receipt"
-    const val ADD_EDIT_RECEIPT_SCREEN = "addEditReceipt"
+    const val PROFILE_SCREEN = "profile"
+    const val RECIPE_DETAIL_SCREEN = "recipe"
+    const val ADD_EDIT_RECIPE_SCREEN = "addEditRecipe"
+    const val SPLASH_SCREEN = "splash"
+    const val SIGN_IN_SCREEN = "signIn"
+    const val SIGN_UP_SCREEN = "singUp"
 }
 
 /**
@@ -29,8 +44,10 @@ private object Screens {
  */
 object DestinationsArgs {
     const val USER_MESSAGE_ARG = "userMessage"
-    const val RECEIPT_ID_ARG = "taskId"
+    const val RECIPE_ID_ARG = "recipeId"
     const val TITLE_ARG = "title"
+    const val MAP_LAT_ARG ="latitude"
+    const val MAP_LNG_ARG = "longitude"
 }
 
 /**
@@ -39,9 +56,13 @@ object DestinationsArgs {
 object Destinations {
     const val DASHBOARD_ROUTE ="$DASHBOARD_SCREEN?$USER_MESSAGE_ARG={$USER_MESSAGE_ARG}"
     const val HOME_ROUTE = HOME_SCREEN
-    const val MAP_ROUTE = MAP_SCREEN
-    const val RECEIPT_DETAIL_ROUTE = "$RECEIPT_DETAIL_SCREEN/{$RECEIPT_ID_ARG}"
-    const val ADD_EDIT_RECEIPT_ROUTE = "$ADD_EDIT_RECEIPT_SCREEN/{$TITLE_ARG}?$RECEIPT_ID_ARG={$RECEIPT_ID_ARG}"
+    const val MAP_ROUTE = "$MAP_SCREEN?$MAP_LAT_ARG={$MAP_LAT_ARG}&$MAP_LNG_ARG={$MAP_LNG_ARG}"
+    const val RECIPE_DETAIL_ROUTE = "$RECIPE_DETAIL_SCREEN/{$RECIPE_ID_ARG}"
+    const val ADD_EDIT_RECIPE_ROUTE = "$ADD_EDIT_RECIPE_SCREEN/{$TITLE_ARG}?$RECIPE_ID_ARG={$RECIPE_ID_ARG}"
+    const val SPLASH_ROUTE = SPLASH_SCREEN
+    const val SIGN_IN_ROUTE = SIGN_IN_SCREEN
+    const val SIGN_UP_ROUTE = SIGN_UP_SCREEN
+    const val PROFILE_ROUTE = PROFILE_SCREEN
 }
 
 /**
@@ -49,31 +70,52 @@ object Destinations {
  */
 class NavigationActions(private val navController: NavHostController) {
 
-    fun navigateToDashboard(resultCode : Int){
+    fun navigateToDashboard(clearBackStack: Boolean = true){
         navController.navigate(Destinations.DASHBOARD_ROUTE) {
-            // Pop up to the start destination of the graph to
-            // avoid building up a large stack of destinations
-            // on the back stack as users select items
-            popUpTo(navController.graph.findStartDestination().id) {
-                saveState = true
+            if (clearBackStack) {
+                popUpTo(SPLASH_ROUTE){
+                    inclusive = true
+                }
             }
-            // Avoid multiple copies of the same destination when
-            // reselecting the same item
             launchSingleTop = true
-            // Restore state when reselecting a previously selected item
             restoreState = true
         }
     }
 
-    fun navigateToReceiptDetail(taskId: String) {
-        navController.navigate("$RECEIPT_DETAIL_ROUTE/$taskId")
+    fun navigateToRecipeDetail(recipeId: String) {
+        navController.navigate("$RECIPE_DETAIL_SCREEN/$recipeId")
     }
 
-    fun navigateToAddEditReceipt(title: Int, taskId: String?) {
+    fun navigateToAddEditRecipe(title: Int, recipeId: String?) {
         navController.navigate(
-            "$ADD_EDIT_RECEIPT_SCREEN/$title".let {
-                if (taskId != null) "$it?$RECEIPT_ID_ARG=$taskId" else it
+            "$ADD_EDIT_RECIPE_SCREEN/$title".let {
+                if (recipeId != null) "$it?$RECIPE_ID_ARG=$recipeId" else it
             }
+        )
+    }
+
+    fun navigateToSignIn() {
+        navController.navigate(
+            SIGN_IN_ROUTE
+        ) {
+            popUpTo(SPLASH_ROUTE){
+                inclusive = true
+            }
+            launchSingleTop = true
+            restoreState = true
+        }
+    }
+
+    fun navigateToSignUp(){
+        navController.navigate(SIGN_UP_ROUTE){
+            launchSingleTop = true
+            restoreState = true
+        }
+    }
+
+    fun navigateToRecipeMap(position : LatLng) {
+        navController.navigate(
+            "$MAP_SCREEN?$MAP_LAT_ARG=${position.latitude.toFloat()}&$MAP_LNG_ARG=${position.longitude.toFloat()}"
         )
     }
 }

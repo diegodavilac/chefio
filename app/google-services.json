@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1097293668646",
+    "project_id": "chefio-da0bb",
+    "storage_bucket": "chefio-da0bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097293668646:android:5af416c5ce44df418021e7",
+        "android_client_info": {
+          "package_name": "dev.diegodc.chefio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1097293668646-6i52q21fjlfp4f40ruh5sqv2783d7omq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.diegodc.chefio",
+            "certificate_hash": "073e6815a5daf478f3e8564c96ed762ecb708b44"
+          }
+        },
+        {
+          "client_id": "1097293668646-9g544pbed8ect8tmjkctlo7se49smis0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyq-cTMZzPUgxzNj6VqlblUndzw--vuko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1097293668646-9g544pbed8ect8tmjkctlo7se49smis0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

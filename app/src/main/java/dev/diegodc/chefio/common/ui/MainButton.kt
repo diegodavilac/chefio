@@ -24,7 +24,9 @@ fun MainButton(
     modifier: Modifier,
     label: String = "",
     onClick: () -> Unit = {},
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    color: Color = PRIMARY_COLOR,
+    icon: @Composable () -> Unit = {}
 ) {
     Button(
         enabled = enabled,
@@ -35,6 +37,8 @@ fun MainButton(
             vertical = 12.dp
         ),
         content = {
+            icon()
+
             Text(
                 text = label,
                 textAlign = TextAlign.Center,
@@ -43,19 +47,31 @@ fun MainButton(
                     lineHeight = 18.sp,
                     fontFamily = fonts,
                     fontWeight = FontWeight.Bold
+                ),
+                color = Color.White,
+                modifier = Modifier.padding(
+                    horizontal = 8.dp
                 )
             )
         },
-        onClick = onClick
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = color
+        )
     )
 }
 
 @Composable
-fun OutlineMainButton(modifier: Modifier, label: String = "", onClick: () -> Unit = {}) {
+fun OutlineMainButton(
+    modifier: Modifier,
+    label: String = "",
+    color: Color = PRIMARY_COLOR,
+    onClick: () -> Unit = {}
+) {
     OutlinedButton(
         modifier = modifier,
         shape = RoundedCornerShape(32.dp),
-        border = BorderStroke(2.dp, PRIMARY_COLOR),
+        border = BorderStroke(2.dp, color = color),
         contentPadding = PaddingValues(
             horizontal = 16.dp,
             vertical = 12.dp
@@ -69,7 +85,7 @@ fun OutlineMainButton(modifier: Modifier, label: String = "", onClick: () -> Uni
                     lineHeight = 18.sp,
                     fontFamily = fonts,
                     fontWeight = FontWeight.Bold,
-                    color = PRIMARY_COLOR
+                    color = color
                 )
             )
         },

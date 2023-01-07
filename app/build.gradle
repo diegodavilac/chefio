@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     namespace 'dev.diegodc.chefio'
@@ -57,17 +58,34 @@ dependencies {
     // Material
     implementation(Dependencies.material)
 
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation("com.google.firebase:firebase-auth-ktx")
+
+    //GSM
+    implementation(Dependencies.googleAuth)
+
     //Compose
+    implementation(Dependencies.activity)
     implementation(Dependencies.composeActivity)
     implementation(Dependencies.composeViewModel)
     implementation(Dependencies.composeViewModelKtx)
     implementation(Dependencies.navigation)
     implementation(Dependencies.accompanistTheme)
     implementation(Dependencies.accompanistSwipeRefresh)
+    implementation(Dependencies.accompanistViewPager)
+    implementation(Dependencies.accompanistSystemUi)
+    implementation(Dependencies.accompanistPermissions)
     implementation(Dependencies.composeRuntime)
     implementation(Dependencies.androidLifecycleKtx)
     implementation(Dependencies.composeSavedState)
     kapt (Dependencies.androidLifecycleCompiler)
+    implementation(Dependencies.paging)
+    implementation(Dependencies.pagingCompose)
+    implementation(Dependencies.maps)
+    implementation(Dependencies.gmsMaps)
 
     //Hilt
     implementation (Dependencies.hilt)
@@ -77,6 +95,7 @@ dependencies {
     //Libraries
     implementation(Dependencies.coil)
     implementation(Dependencies.coilCompose)
+    implementation(Dependencies.cloudinary)
 
     // Android Studio Preview support
     implementation(Dependencies.composePreview)
